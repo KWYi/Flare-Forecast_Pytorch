@@ -14,10 +14,10 @@ class Encoder(nn.Module):
         self.layer_num = layer_num
         self.batch_size = batch_size
         self.batch_size_fin = TOTAL_NUM % batch_size
-        self.state_zero = (nn.Parameter(torch.zeros(layer_num, batch_size, hidden_size)).to(DEVICE),
-                           nn.Parameter(torch.zeros(layer_num, batch_size, hidden_size)).to(DEVICE))
-        self.state_zero_fin = (nn.Parameter(torch.zeros(layer_num, self.batch_size_fin, hidden_size)).to(DEVICE),
-                               nn.Parameter(torch.zeros(layer_num, self.batch_size_fin, hidden_size)).to(DEVICE))
+        self.state_zero = (nn.Parameter(torch.randn(layer_num, batch_size, hidden_size)).to(DEVICE),
+                           nn.Parameter(torch.randn(layer_num, batch_size, hidden_size)).to(DEVICE))
+        self.state_zero_fin = (nn.Parameter(torch.randn(layer_num, self.batch_size_fin, hidden_size)).to(DEVICE),
+                               nn.Parameter(torch.randn(layer_num, self.batch_size_fin, hidden_size)).to(DEVICE))
 
         self.lstm = nn.LSTM(self.feature_size, self.hidden_size, self.layer_num, batch_first=True)
 
